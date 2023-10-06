@@ -18,6 +18,20 @@ function GetWeatherIcon(props){
   return <img/>;
 }
 
+function GetFunnyMessage(props){
+  const listMessage = {
+    "sunny": "Prend ta crème solaire",
+    "cloudy": "Pas besoin de lunette de soleil",
+    "windy": "Il fait frisquet",
+    "rainy": "N'oublie pas ton parapluie",
+    "stormy": "Reste dedans"
+  }
+
+  if(props.weather) return <p style={{color:'black', marginRight:100}}>{listMessage[props.weather]}</p>;
+
+  return "";
+}
+
 
 function ShowCityData(props){
   if(props.cityToSearch == "waiting"){
@@ -33,6 +47,7 @@ function ShowCityData(props){
                                   <p style={{color:"black", marginRight:200,fontWeight:500}}>{props.cityToSearch.toUpperCase()}.FRANCE</p>
                                     <hr/><p style={{color:"black", marginRight:80}}>{props.temp}°C  <GetWeatherIcon weather={props.weather}/></p>
                                     <p style={{color:"black", marginRight:200}}>{props.weather}</p>
+                                    <hr/><GetFunnyMessage weather={props.weather}/>
                                   </div>);
 
   return "";
