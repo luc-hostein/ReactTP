@@ -13,15 +13,21 @@ function App() {
   const [cityToSearch, setCityToSearch] = useState("")
   const [temp, setTemp] = useState("")
 
+
+  React.useEffect(() => {
+    fetchCityData();
+  }, [cityToSearch]);
+
+
   const fetchCityData = () => {
-    fetch("https://jb03dcnv74.execute-api.eu-west-1.amazonaws.com/Prod/weather/"+cityToSearch)
+    cityToSearch ? fetch("https://jb03dcnv74.execute-api.eu-west-1.amazonaws.com/Prod/weather/"+cityToSearch)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         setWeather(data.condition);
         setTemp(data.temperature);
-      });
+      }) : "";
   };
 
   const fetchLocalisation = () => {
@@ -29,27 +35,24 @@ function App() {
       navigator.geolocation.getCurrentPosition(
         function(position){
           console.log(position);
-          var latitude = position.coords.latitude,
-          longitude = position.coords.longitudes;
-          console.log(latitude+" "+longitude);
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          fetch("https://jb03dcnv74.execute-api.eu-west-1.amazonaws.com/Prod/geo?lon="+longitude+"&lat="+latitude)
+            .then((response) => {
+            return response.json();
+            })
+            .then((data) => {
+              setCityToSearch(data.city);
+          });
         },
         (err) => console.log(err)
       );
-    }
-
-    fetch("https://jb03dcnv74.execute-api.eu-west-1.amazonaws.com/Prod/geo?lon="+longitude+"&lat="+latitude)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
+    } 
   }
 
   const onSubmitHandler = (event) =>{
       event.preventDefault();
       setCityToSearch(event.currentTarget.elements.city.value);
-      fetchCityData();
   }
 
   return (
