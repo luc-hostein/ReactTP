@@ -22,14 +22,20 @@ function GetWeatherIcon(props){
 function ShowCityData(props){
   if(props.cityToSearch == "waiting"){
     console.log("Wait for sheacrh"); 
-    return <div>Waiting for server</div>;
+    return <div><p style={{color:"black"}}>Waiting for server</p></div>;
   } 
 
   if(props.cityToSearch == "error"){
-    return <div>Unable to access server</div>
+    return <div><p style={{color:"black"}}>Unable to access server</p></div>
   }
 
-  return (<div>{props.cityToSearch}  {props.temp}<GetWeatherIcon weather={props.weather}/><br/>{props.weather}</div>);
+  if(props.cityToSearch) return (<div>
+                                  <p style={{color:"black"}}>{props.cityToSearch}</p>
+                                    <hr/><p style={{color:"black"}}>{props.temp}<GetWeatherIcon weather={props.weather}/></p>
+                                    <p style={{color:"black"}}>{props.weather}</p>
+                                  </div>);
+
+  return "";
 }
 
 
@@ -85,9 +91,14 @@ function App() {
   return (
     <>
       <div>
-        <form onSubmit={onSubmitHandler}><button type="submit"></button><input type='text' id='city'></input></form><br/>
-        <div><ShowCityData cityToSearch={cityToSearch} weather={weather} temp={temp}/></div><br/>
-        <br/><button onClick={fetchLocalisation}>Geoloc</button>
+        <form onSubmit={onSubmitHandler}>
+          <button type="submit" className="submit">
+            <img src="../img/loupe.png" width='20' height='20'></img>
+          </button>
+          <input type='text' id='city' className="input">
+          </input></form><br/>
+        <div><ShowCityData cityToSearch={cityToSearch} weather={weather} temp={temp}/></div>
+        <br/><button onClick={fetchLocalisation} style={{color:"black"}}>Geoloc</button>
       </div>
     </>
   )
