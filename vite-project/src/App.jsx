@@ -6,14 +6,14 @@ import './App.css'
 
 function GetWeatherIcon(props){
   const iconList = {
-    "sunny": "../../public/sun.png",
-    "cloudy": "../../public/cloud.png",
-    "windy": "../../public/wind.png",
-    "rainy": "../../public/rainy.png",
-    "stormy": "../../public/thunderstorm.png"
+    "sunny": "/sun.png",
+    "cloudy": "/cloud.png",
+    "windy": "./wind.png",
+    "rainy": "/rainy.png",
+    "stormy": "/thunderstorm.png"
   };
 
-  if(props.weather) return <img src={iconList[props.weather]} width="30" height="30"></img>;
+  if(props.weather) return <img src={iconList[props.weather]} width="50" height="50" style={{marginLeft:100, alignContent:'center'}}></img>;
 
   return <img/>;
 }
@@ -30,9 +30,9 @@ function ShowCityData(props){
   }
 
   if(props.cityToSearch) return (<div>
-                                  <p style={{color:"black"}}>{props.cityToSearch}</p>
-                                    <hr/><p style={{color:"black"}}>{props.temp}<GetWeatherIcon weather={props.weather}/></p>
-                                    <p style={{color:"black"}}>{props.weather}</p>
+                                  <p style={{color:"black", marginRight:200,fontWeight:500}}>{props.cityToSearch.toUpperCase()}.FRANCE</p>
+                                    <hr/><p style={{color:"black", marginRight:80}}>{props.temp}°C  <GetWeatherIcon weather={props.weather}/></p>
+                                    <p style={{color:"black", marginRight:200}}>{props.weather}</p>
                                   </div>);
 
   return "";
@@ -90,7 +90,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className='font-link'>
         <form onSubmit={onSubmitHandler}>
           <button type="submit" className="submit">
             <img src="/loupe.png" width='20' height='20'></img>
