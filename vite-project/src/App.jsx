@@ -4,8 +4,18 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function GetWeather(props){
-  
+function GetWeatherIcon(props){
+  const iconList = {
+    "sunny": "../img/sun.png",
+    "cloudy": "../img/cloud.png",
+    "windy": "../img/wind.png",
+    "rainy": "../img/rainy.png",
+    "stormy": "../img/thunderstorm.png"
+  };
+
+  if(props.weather) return <img src={iconList[props.weather]}></img>;
+
+  return "";
 }
 
 function App() {
@@ -59,7 +69,7 @@ function App() {
     <>
       <div>
         <form onSubmit={onSubmitHandler}><button type="submit"></button><input type='text' id='city'></input></form><br/>
-        <div>{cityToSearch}  {temp}</div><br/><div>{weather}</div>
+        <div>{cityToSearch}  {temp}</div><GetWeatherIcon weather={weather}/><br/><div>{weather}</div>
         <br/><button onClick={fetchLocalisation}>Geoloc</button>
       </div>
     </>
