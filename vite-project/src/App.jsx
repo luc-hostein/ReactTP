@@ -6,11 +6,11 @@ import './App.css'
 
 function GetWeatherIcon(props){
   const iconList = {
-    "sunny": "../img/sun.png",
-    "cloudy": "../img/cloud.png",
-    "windy": "../img/wind.png",
-    "rainy": "../img/rainy.png",
-    "stormy": "../img/thunderstorm.png"
+    "sunny": "src/assets/sun.png",
+    "cloudy": "src/assets/cloud.png",
+    "windy": "src/assets/wind.png",
+    "rainy": "src/assets/rainy.png",
+    "stormy": "src/assets/thunderstorm.png"
   };
 
   if(props.weather) return <img src={iconList[props.weather]} width="30" height="30"></img>;
@@ -93,7 +93,7 @@ function App() {
       <div>
         <form onSubmit={onSubmitHandler}>
           <button type="submit" className="submit">
-            <img src="../img/loupe.png" width='20' height='20'></img>
+            <img src="src/assets/loupe.png" width='20' height='20'></img>
           </button>
           <input type='text' id='city' className="input">
           </input></form><br/>
