@@ -93,7 +93,7 @@ function App() {
       <div>
         <form onSubmit={onSubmitHandler}>
           <button type="submit" className="submit">
-            <img src="../../public/loupe.png" width='20' height='20'></img>
+            <img src="/loupe.png" width='20' height='20'></img>
           </button>
           <input type='text' id='city' className="input">
           </input></form><br/>
